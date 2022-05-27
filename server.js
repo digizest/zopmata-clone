@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const mongooseDB = require("./config/db.mongoose")
+//import routes
+const userRoutes = require("./routers/user.route")
 //for loggin module imports
 const morgan = require('morgan')
-const vinston = require('winston')
+const winston = require('winston')
 
 //connectivity check with mongodb database
 //connection par error ane pr y line clegy
@@ -15,13 +17,13 @@ mongooseDB.once("open", function () {
 
 
 //attech pre defined middilewares
-app.use(express.json());
-app.use(morgan())
+app.use(express.json());//as a body parser
+app.use(morgan())//for http request logging
 
 //attech custum middilewares
 
 //attech all the apis routes
-
+app.use("/v1/user" , userRoutes )
 //API: for testing absolute path
 //just hit the below path and see the magic
 //localhost:8080/
