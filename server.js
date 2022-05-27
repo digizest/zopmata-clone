@@ -6,6 +6,9 @@ const userRoutes = require("./routers/user.route")
 //for loggin module imports
 const morgan = require('morgan')
 const winston = require('winston')
+//import costum middileware
+const { dummymiddileware } = require("./middilewares/index") 
+
 
 //connectivity check with mongodb database
 //connection par error ane pr y line clegy
@@ -21,6 +24,9 @@ app.use(express.json());//as a body parser
 app.use(morgan())//for http request logging
 
 //attech custum middilewares
+app.use(dummymiddileware)
+
+
 
 //attech all the apis routes
 app.use("/v1/user" , userRoutes )
