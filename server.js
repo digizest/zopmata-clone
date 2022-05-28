@@ -6,6 +6,9 @@ const userRoutes = require("./routers/user.route")
 //for loggin module imports
 const morgan = require('morgan')
 const winston = require('winston')
+//for swagger api documentation
+const swaggerUi = require("swagger-ui-express")
+const swaggerJsDoc = require("swagger-jsdoc")
 //import costum middileware
 const { dummymiddileware } = require("./middilewares/index") 
 
@@ -21,8 +24,27 @@ mongooseDB.once("open", function () {
 
 //attech pre defined middilewares
 app.use(express.json());//as a body parser
-app.use(morgan())//for http request logging
+app.use(morgan('dev'))//for http request logging
+//attech swagger as a middileware
+const options = {
+    definition: {
+        openapi : "3.0.0",
+        info : {
+            title : "Library Api",
+            version : "1.0.0",
+            description : "zopmata" 
+        },
+        servers : [
+            {
+                url : "http://localhost:8080"
+            }
+        ]
+    },
+    apis : ["./routers/*.js"]
+}
 
+const spec = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(spec))
 //attech custum middilewares
 app.use(dummymiddileware)
 
