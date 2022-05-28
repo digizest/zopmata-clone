@@ -1,0 +1,44 @@
+
+api-1 : registration of the user in the system :
+user ka registration krne pr use mail or mobile pr ek otp jayga jo verify krwane pr uska account ban jayga
+otp database table m store hoga abhi bad m ham otp k dusre system dekhenge
+[filhal mobile or mail pr send krne ki process pending h]
+
+
+api-2 : verification of the otp 
+
+api-3 : resend otp api to send on mail or mobile Number
+
+api-4 : 1 login api : user ka email s login krwana with passwords
+        2  login api : user ka mobile number s login krwana with passwords
+        3  login api : user ka email s login krwana with otp on mail
+        4  login api : user ka email s login krwana with otp on number
+
+api-5 reset password api 
+    1 user acc k password reset krna by sending otp on number
+    2 user acc k password reset krna by sending reset link on email
+    3 user acc k password reset krna by sending otp on email
+    4 user acc k password reset krna by sending reset link on email
+
+api-6 update profile api
+    1 update email , mobile number , first name , last name , 
+    2 update address like city , address , house number , landmark , state , pincode
+    3 update profile picture url with bucket system
+    4 update profile picture with base64
+
+api-7  change user subscription type [ this is administrator apis]
+    1 like change user subscription in yearly_package_customer , prime_cutomer , regular_customer by default subscription type will be normal at the time of acc createConnection
+
+api-8 block , disabled , temp_block[when user failed with three otp attempts ] automatic api or administrator api
+
+api-9 show the list of all customer [ only to admin ] with below filters
+    1 customer who registred on perticular date or in between the date from and to
+    2 search customer with the name
+    3 filter customer with the acc_status basis , by city , by state , or by any column cutome query builder concepts
+    4 sort cutomer by [ name in asc , name in desc , registration date [ asc , desc ] , ]
+    5 pagination with limit and offset
+    
+api-10 show wallet ammount
+api-11 reduce wallet balence
+api-12 add balance to wallet
+api-13 flag to show wallet ammount is less notification system
