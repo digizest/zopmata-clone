@@ -13,6 +13,7 @@ const swaggerJsDoc = require("swagger-jsdoc")
 const { dummymiddileware } = require("./middilewares/index") 
 
 
+
 //connectivity check with mongodb database
 //connection par error ane pr y line clegy
 mongooseDB.on("error", console.error.bind(console, "connection error: "));

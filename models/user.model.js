@@ -1,9 +1,77 @@
-const { Schema , model } = require("mongoose")
+
+const { Schema, model } = require("mongoose");
+
 
 const userSchema = new Schema({
+ First_name: {
+    type: String,
+    required: true,
+  },
 
-})
+  Last_name: {
+    type: String,
+    required: true,
+  },
 
-const userModel =  model("users" , userSchema )
+  email: {
+    type: String,
+    required: true,
+    unique : true
+  },
 
-module.exports = { userModel }
+  password: {
+    type: String,
+    required: true,
+  },
+
+  mobileNumber: [Number],
+
+  otp: {
+    type: Number,
+  },
+
+  profileUrl: {
+      type : Array,
+      default : []
+  },
+
+  subscription : {
+      type : String,
+    enum: ['normalUser', 'primeUser',  'goldUser', 'yearlyMerbership', 'halfYearlyMembership', 'quarterlyMembership'],
+    default : 'normalUser'
+
+  },
+  
+  status : {
+type : String,
+enum : ['active','disabled','blocked by admin','autoblock'],
+default : 'active'
+// autoblock : when wrong otp entered 3 times or any suspicious activity done.
+  },
+
+  currentLocation : {
+      latitude :{
+       type : Number
+      },
+      longitude : {
+          type : Number,
+          
+      }  
+  },
+
+  // customer id will be unique by uuid.
+  customer_id : String ,
+  
+
+  address_id : [],
+
+  walletAmount : {
+      type : Number,
+      default : 0
+  }
+  
+},{timestamps: true});
+
+const userModel = model("users", userSchema);
+
+module.exports = { userModel };
