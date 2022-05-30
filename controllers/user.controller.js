@@ -45,7 +45,6 @@ const signUpuser = async (req,res) => {
         });
      }
  })
-
 }
 
 
