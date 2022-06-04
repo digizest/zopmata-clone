@@ -26,13 +26,22 @@ const userSchema = new Schema({
 
   mobileNumber: [Number],
 
-  otp: {
-    type: Number,
-  },
+  otp: [
+     Number,
+],
+
+token : {
+  type: String,
+},
 
   profileUrl: {
       type : Array,
       default : []
+  },
+
+  Role : {
+    type : Number,
+    default : 0
   },
 
   subscription : {

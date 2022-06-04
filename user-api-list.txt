@@ -1,3 +1,5 @@
+Note - Swagger Implimentation is in process url - http://localhost:8080/api-docs
+
 
 api-1 : registration of the user in the system :
 user ka registration krne pr use mail or mobile pr ek otp jayga jo verify krwane pr uska account ban jayga
@@ -9,7 +11,7 @@ api-2 : verification of the otp
 
 api-3 : resend otp api to send on mail or mobile Number
 
-api-4 : 1 login api : user ka email s login krwana with passwords
+api-4 : 1  login api : user ka email s login krwana with passwords -done
         2  login api : user ka mobile number s login krwana with passwords
         3  login api : user ka email s login krwana with otp on mail
         4  login api : user ka email s login krwana with otp on number

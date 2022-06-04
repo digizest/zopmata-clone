@@ -41,7 +41,7 @@ const options = {
             }
         ]
     },
-    apis : ["./routers/*.js"]
+    apis : ['./routers/user.route.js']
 }
 
 const spec = swaggerJsDoc(options);
@@ -56,6 +56,20 @@ app.use("/v1/user" , userRoutes )
 //API: for testing absolute path
 //just hit the below path and see the magic
 //localhost:8080/
+
+
+//get api 
+
+/**
+ * @swagger
+ * /:
+ *  get :
+ *      summery : this api is used to check is get methode is working or not
+ *      description : this api is used to check is get methode is working or not
+ *      responses : 
+ *          200:
+ *              description: to test get methode 
+ */
 app.get("/",(req , res )=>{
     res.status(200).send("Hellow World of ZOPMATA!")
 })
