@@ -1,85 +1,90 @@
-
 const { Schema, model } = require("mongoose");
 
+const userSchema = new Schema(
+  {
+    First_name: {
+      type: String,
+      required: true,
+    },
 
-const userSchema = new Schema({
- First_name: {
-    type: String,
-    required: true,
-  },
+    Last_name: {
+      type: String,
+      required: true,
+    },
 
-  Last_name: {
-    type: String,
-    required: true,
-  },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
 
-  email: {
-    type: String,
-    required: true,
-    unique : true
-  },
+    password: {
+      type: String,
+      required: true,
+    },
 
-  password: {
-    type: String,
-    required: true,
-  },
+    mobileNumber: [Number],
 
-  mobileNumber: [Number],
+    otp: {
+      type: Number,
+      default: 0000,
+    },
 
-  otp: [
-     Number,
-],
+    token: {
+      type: String,
+    },
 
-token : {
-  type: String,
-},
+    profileUrl: {
+      type: Array,
+      default: [],
+    },
 
-  profileUrl: {
-      type : Array,
-      default : []
-  },
+    Role: {
+      type: Number,
+      default: 0,
+    },
 
-  Role : {
-    type : Number,
-    default : 0
-  },
+    subscription: {
+      type: String,
+      enum: [
+        "normalUser",
+        "primeUser",
+        "goldUser",
+        "yearlyMerbership",
+        "halfYearlyMembership",
+        "quarterlyMembership",
+      ],
+      default: "normalUser",
+    },
 
-  subscription : {
-      type : String,
-    enum: ['normalUser', 'primeUser',  'goldUser', 'yearlyMerbership', 'halfYearlyMembership', 'quarterlyMembership'],
-    default : 'normalUser'
+    status: {
+      type: String,
+      enum: ["active", "disabled", "blocked by admin", "autoblock"],
+      default: "active",
+      // autoblock : when wrong otp entered 3 times or any suspicious activity done.
+    },
 
-  },
-  
-  status : {
-type : String,
-enum : ['active','disabled','blocked by admin','autoblock'],
-default : 'active'
-// autoblock : when wrong otp entered 3 times or any suspicious activity done.
-  },
-
-  currentLocation : {
-      latitude :{
-       type : Number
+    currentLocation: {
+      latitude: {
+        type: Number,
       },
-      longitude : {
-          type : Number,
-          
-      }  
+      longitude: {
+        type: Number,
+      },
+    },
+
+    // customer id will be unique by uuid.
+    customer_id: String,
+
+    address_id: [],
+
+    walletAmount: {
+      type: Number,
+      default: 0,
+    },
   },
-
-  // customer id will be unique by uuid.
-  customer_id : String ,
-  
-
-  address_id : [],
-
-  walletAmount : {
-      type : Number,
-      default : 0
-  }
-  
-},{timestamps: true});
+  { timestamps: true }
+);
 
 const userModel = model("users", userSchema);
 
