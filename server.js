@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
 const mongooseDB = require("./config/db.mongoose")
-//import routes
+
+
+//import routes 
 const userRoutes = require("./routers/user.route")
+const restaurantRoutes = require('./routers/restuarent.route')
+
 //for loggin module imports
 const morgan = require('morgan')
 const winston = require('winston')
@@ -51,8 +55,11 @@ app.use(dummymiddileware)
 
 
 
+
+
 //attech all the apis routes
 app.use("/v1/user" , userRoutes )
+app.use('/v1/restaurant',restaurantRoutes)
 //API: for testing absolute path
 //just hit the below path and see the magic
 //localhost:8080/

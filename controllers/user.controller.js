@@ -1,6 +1,7 @@
 const { userModel } = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
 require("dotenv").config();
 
 
@@ -154,6 +155,25 @@ const getListOfUser = (req, res) => {
     });
 };
 
+//get user by id 
+const getUserById = (req, res) => {
+  let id = req.query.id;
+  userModel.findById(id)
+    .then((data) => {
+      return res.status(200).json({
+        total: data.length,
+        msg: "successfully got user",
+        result: data,
+      });
+    })
+    .catch((err) => {
+      return res.status(400).json({
+        error: err,
+        msg: "failed to get user",
+      });
+    });
+};
+
 
 
 // Generate token
@@ -163,4 +183,4 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { signUpuser, loginUser, userExist, forgetPassword , getListOfUser, Signout};
+module.exports = { signUpuser, loginUser, userExist, forgetPassword , getListOfUser, Signout ,getUserById};

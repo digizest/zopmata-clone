@@ -3,13 +3,15 @@ const routes = express.Router();
 //import auth middileware
 const { verificationAuth } = require("../middilewares/auth");
 
+//import user controller 
 const {
   signUpuser,
   loginUser,
   forgetPassword,
   userExist,
   getListOfUser,
-  Signout
+  Signout,
+  getUserById
 } = require("../controllers/user.controller");
 
 //nodemailer
@@ -21,34 +23,34 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const { route } = require("express/lib/application");
 const { otpSend, verifyOtp } = require("../helper/nodemailer");
 
-/**
- * @swagger
- * /:
- *  get :
- *      summery : this api is used to check is get methode is working or not
- *      description : this api is used to check is get methode is working or not
- *      responses :
- *          200:
- *              description: to test get methode
- */
-// routes.get("/get-user-list" , [ verificationAuth , userController.getListOfUser ])
+// /**
+//  * @swagger
+//  * /:
+//  *  get :
+//  *      summery : this api is used to check is get methode is working or not
+//  *      description : this api is used to check is get methode is working or not
+//  *      responses :
+//  *          200:
+//  *              description: to test get methode
+//  */
+// // routes.get("/get-user-list" , [ verificationAuth , userController.getListOfUser ])
 
-/**
- * @swagger
- * /:
- *  post :
- *      summery : this api is used to check is post methode is working or not
- *      description : Added succesfully
- *      requestBody :
- *           required: true
- *           content :
- *               application/json
- *                  schema :
- *                      $ref : '#components/schema/user'
- *      responses :
- *          200:
- *              description: to test post methode
- */
+// /**
+//  * @swagger
+//  * /:
+//  *  post :
+//  *      summery : this api is used to check is post methode is working or not
+//  *      description : Added succesfully
+//  *      requestBody :
+//  *           required: true
+//  *           content :
+//  *               application/json
+//  *                  schema :
+//  *                      $ref : '#components/schema/user'
+//  *      responses :
+//  *          200:
+//  *              description: to test post methode
+//  */
 //add user api
 routes.post("/sign-up", signUpuser);
 
@@ -72,6 +74,10 @@ routes.get("/verifyotp", verifyOtp);
 //get list of user 
 routes.get("/getAllUser", getListOfUser)
 
+//signout user
 routes.get('/signout',Signout);
+
+//get user by id 
+routes.get('/getUserById/' , getUserById)
 
 module.exports = routes;
