@@ -11,6 +11,11 @@ const swaggerUi = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
 //import costum middileware
 const { dummymiddileware } = require("./middilewares/index") 
+const cors = require('cors');
+
+app.use(cors({
+    origin: "http://localhost:4200"
+}))
 
 
 
@@ -60,23 +65,23 @@ app.use("/v1/user" , userRoutes )
 
 //get api 
 
-/**
- * @swagger
- * /:
- *  get :
- *      summery : this api is used to check is get methode is working or not
- *      description : this api is used to check is get methode is working or not
- *      responses : 
- *          200:
- *              description: to test get methode 
- */
+// /**
+//  * @swagger
+//  * /:
+//  *  get :
+//  *      summery : this api is used to check is get methode is working or not
+//  *      description : this api is used to check is get methode is working or not
+//  *      responses : 
+//  *          200:
+//  *              description: to test get methode 
+//  */
 app.get("/",(req , res )=>{
     res.status(200).send("Hellow World of ZOPMATA!")
 })
 
 //server config and running steps
 const portNumber = 8080;
-app.listen(portNumber , (err)=>{
+const server = app.listen(portNumber , (err)=>{
     if(err)
     {
         console.log(`==================server running failed due to err at ${ new Date() }=============`)
@@ -84,4 +89,24 @@ app.listen(portNumber , (err)=>{
     }else{
         console.log("server is up and running at port number " , portNumber)
     }
+})
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ['GET','POST'],
+        allowedHeaders: ["my-custom-header"],
+        credentials : true
+    }
+})
+
+io.on('connection', (socket) => {
+    console.log("A User Connected");
+    socket.emit('test event', 'hii from backend');
+    socket.on('disconnect', function(){
+        console.log("user disconnected");
+    })
+    socket.on('my message', (msg) => {
+        console.log('message', msg);
+    })
 })
