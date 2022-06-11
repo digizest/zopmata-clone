@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
-
-
 //Sign Up user
 const signUpuser = async (req, res) => {
   const { First_name, Last_name, email, password, mobileNumber } = req.body;
@@ -67,8 +65,7 @@ const loginUser = async (req, res) => {
     const token = generateToken(user._id);
 
     //put token in cookie
-  res.cookie("token",token,{expire: new Date()+9999})
-
+    res.cookie("token", token, { expire: new Date() + 9999 });
 
     await userModel.updateOne({ _id: user._id }, { $set: { token: token } });
     res.status(200).json({
@@ -85,14 +82,13 @@ const loginUser = async (req, res) => {
   }
 };
 
-
 //singout user
-const Signout = (req,res)=>{
-    res.clearCookie("token");
-    res.json({
-        message : "user signout succesfully"})
+const Signout = (req, res) => {
+  res.clearCookie("token");
+  res.json({
+    message: "user signout succesfully",
+  });
 };
-
 
 //forget password api
 const forgetPassword = async (req, res) => {
@@ -131,7 +127,6 @@ const userExist = async (req, res) => {
   }
 };
 
-//get user
 //get all user  list with paggination
 const getListOfUser = (req, res) => {
   let page = req.query.pageNo - 1;
@@ -142,23 +137,22 @@ const getListOfUser = (req, res) => {
     .limit(limit)
     .skip(skip)
     .then((data) => {
-      return res
-        .status(200)
-        .json({
-          total: data.length,
-          msg: "successfully got all user",
-          result: data,
-        });
+      return res.status(200).json({
+        total: data.length,
+        msg: "successfully got all user",
+        result: data,
+      });
     })
     .catch((err) => {
       return res.status(400).json({ error: err, msg: "failed to get user" });
     });
 };
 
-//get user by id 
+//get user by id
 const getUserById = (req, res) => {
   let id = req.query.id;
-  userModel.findById(id)
+  userModel
+    .findById(id)
     .then((data) => {
       return res.status(200).json({
         total: data.length,
@@ -174,7 +168,35 @@ const getUserById = (req, res) => {
     });
 };
 
-
+//update user name by id
+const updateUser = (req, res) => {
+  let userId = req.params.id;
+  let { First_name, Last_name } = req.body;
+  let dataToUpdate = {
+    First_name: First_name,
+    Last_name: Last_name,
+  };
+  //1 where , 2 set : what to update
+  userModel.findOneAndUpdate(
+    {
+      _id: userId,
+    },
+    dataToUpdate,
+    (err, data) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+          msg: "Your request could not be processed. Please try again.",
+        });
+      } else {
+        return res.status(200).json({
+          msg: "user has been updated successfully!",
+          data: data,
+        });
+      }
+    }
+  );
+};
 
 // Generate token
 const generateToken = (id) => {
@@ -183,4 +205,13 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { signUpuser, loginUser, userExist, forgetPassword , getListOfUser, Signout ,getUserById};
+module.exports = {
+  signUpuser,
+  loginUser,
+  userExist,
+  forgetPassword,
+  getListOfUser,
+  Signout,
+  getUserById,
+  updateUser,
+};

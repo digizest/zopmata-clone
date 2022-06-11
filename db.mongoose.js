@@ -16,7 +16,9 @@ const dbname = "Zopmata";
 
 mongoose.connect(
   
- `mongodb+srv://Dizigest:zopmata@cluster0.uymt0.mongodb.net/Zopmata?retryWrites=true&w=majority`
+ `mongodb+srv://Dizigest:zopmata@cluster0.uymt0.mongodb.net/Zopmata?retryWrites=true&w=majority`,{
+  
+ }
 ).then(()=>{
   console.log("database connected")
 }).catch((err)=>{

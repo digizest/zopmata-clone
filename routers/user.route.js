@@ -3,7 +3,7 @@ const routes = express.Router();
 //import auth middileware
 const { verificationAuth } = require("../middilewares/auth");
 
-//import user controller 
+//import user controller
 const {
   signUpuser,
   loginUser,
@@ -11,7 +11,8 @@ const {
   userExist,
   getListOfUser,
   Signout,
-  getUserById
+  getUserById,
+  updateUser,
 } = require("../controllers/user.controller");
 
 //nodemailer
@@ -22,6 +23,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const { route } = require("express/lib/application");
 const { otpSend, verifyOtp } = require("../helper/nodemailer");
+const { Router } = require("express");
 
 // /**
 //  * @swagger
@@ -57,7 +59,7 @@ routes.post("/sign-up", signUpuser);
 //login user api
 routes.get("/login", loginUser);
 
-//note : when user found imn db then next page will render otherwise it provide errore
+//note : when user found in db then next page will render otherwise it provide errore
 //both are forget password api first page is for check user exist by email or number
 //secound page is for update password in email and password two fileds are there
 routes.get("/exist", userExist);
@@ -71,13 +73,16 @@ routes.post("/sendotp", otpSend);
 //verify otp api
 routes.get("/verifyotp", verifyOtp);
 
-//get list of user 
-routes.get("/getAllUser", getListOfUser)
+//get list of user
+routes.get("/getAllUser", getListOfUser);
 
 //signout user
-routes.get('/signout',Signout);
+routes.get("/signout", Signout);
 
-//get user by id 
-routes.get('/getUserById/' , getUserById)
+//get user by id
+routes.get("/getUserById/", getUserById);
+
+//update user
+routes.put("/updateUser", updateUser);
 
 module.exports = routes;

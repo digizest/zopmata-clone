@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-
 const restuarentSchema = new Schema(
   {
     restaurantName: {
@@ -15,9 +14,9 @@ const restuarentSchema = new Schema(
       type: String,
       required: true,
     },
-    password : {
-      type : String,
-      required : true
+    password: {
+      type: String,
+      required: true,
     },
     mobileNumber: [Number],
 
@@ -47,4 +46,4 @@ const restuarentSchema = new Schema(
 
 const restuarentModel = model("restuarents", restuarentSchema);
 
-module.exports = restuarentModel 
+module.exports = restuarentModel;
