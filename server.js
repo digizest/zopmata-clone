@@ -82,7 +82,7 @@ app.get("/test",(req , res )=>{
 })
 
 //server config and running steps
-const portNumber = 8080 || process.env.PORT;
+const portNumber =  process.env.PORT || 8080 ;
 app.listen(portNumber , (err)=>{
     if(err)
     {
