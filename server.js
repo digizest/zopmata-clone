@@ -67,17 +67,17 @@ app.use('/v1/restaurant',restaurantRoutes)
 
 //get api 
 
-/**
- * @swagger
- * /:
- *  get :
- *      summery : this api is used to check is get methode is working or not
- *      description : this api is used to check is get methode is working or not
- *      responses : 
- *          200:
- *              description: to test get methode 
- */
-app.get("/",(req , res )=>{
+// /**
+//  * @swagger
+//  * /:
+//  *  get :
+//  *      summery : this api is used to check is get methode is working or not
+//  *      description : this api is used to check is get methode is working or not
+//  *      responses : 
+//  *          200:
+//  *              description: to test get methode 
+//  */
+app.get("/test",(req , res )=>{
     res.status(200).send("Hellow World of ZOPMATA!")
 })
 
