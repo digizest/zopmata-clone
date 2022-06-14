@@ -6,6 +6,9 @@ const mongooseDB = require("./config/db.mongoose")
 //import routes 
 const userRoutes = require("./routers/user.route")
 const restaurantRoutes = require('./routers/restuarent.route')
+const categoryRoutes = require("./routers/category.route")
+const subcategoryRoutes = require('./routers/subcategory.route')
+const addressRoutes = require('./routers/address.route')
 
 //for loggin module imports
 const morgan = require('morgan')
@@ -60,6 +63,9 @@ app.use(dummymiddileware)
 //attech all the apis routes
 app.use("/v1/user" , userRoutes )
 app.use('/v1/restaurant',restaurantRoutes)
+app.use("/v1/category" , categoryRoutes)
+app.use("/v1/subcategory", subcategoryRoutes)
+app.use("/v1/address", addressRoutes)
 //API: for testing absolute path
 //just hit the below path and see the magic
 //localhost:8080/
